@@ -3,7 +3,7 @@ services:
   users:
     build: 
       context: ./users-service
-      target: production
+      target: development
     image: users
     container_name: users
     env_file:
@@ -13,13 +13,14 @@ services:
       - "5555:5555"
     volumes:
       - ./users-service:/app
+      - /app/node_modules
     depends_on:
       - postgresdb
       - redis-service
   organizations:
     build: 
       context: ./organizations-service
-      target: production
+      target: development
     image: organizations
     container_name: organizations
     env_file:
@@ -28,6 +29,7 @@ services:
       - "3002:3000"
     volumes:
       - ./organizations-service:/app
+      - /app/node_modules
     depends_on:
       - mongodb
   postgresdb:
