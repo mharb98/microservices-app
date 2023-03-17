@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { ContactInfo } from '../../contact-infos/schema/contact-info.schema';
 import { Location } from '../../locations/schema/location.schema';
+import { Moderator } from '../../moderators/schema/moderator.schema';
 
 @Schema({ timestamps: true, collection: 'organizations' })
 export class Organization {
@@ -21,6 +22,11 @@ export class Organization {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ContactInfo' }],
   })
   contactInfo: ContactInfo[];
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Moderator',
+  })
+  moderator: Moderator;
 }
 
 export const OrganizationSchema = SchemaFactory.createForClass(Organization);

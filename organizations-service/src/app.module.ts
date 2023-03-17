@@ -8,6 +8,8 @@ import { OrganizationMiddleware } from './common/middlewares/organization-middle
 import { CharityTypesModule } from './charity-types/charity-types.module';
 import { OrganizationsCharityTypesModule } from './organizations-charity-types/organizations-charity-types.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { BrokersModule } from './brokers/brokers.module';
+import { ModeratorsModule } from './moderators/moderators.module';
 
 @Module({
   imports: [
@@ -16,7 +18,9 @@ import { MongooseModule } from '@nestjs/mongoose';
     LocationsModule,
     CharityTypesModule,
     OrganizationsCharityTypesModule,
-    MongooseModule.forRoot(process.env.DATABASE_URL),
+    MongooseModule.forRoot('mongodb://localhost/organizations_service'),
+    BrokersModule,
+    ModeratorsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

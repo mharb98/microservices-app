@@ -6,7 +6,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-   const config = new DocumentBuilder()
+  const config = new DocumentBuilder()
     .setTitle('Charity Service')
     .setDescription('The charity service API description')
     .setVersion('1.0')
@@ -17,6 +17,6 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(3000);
+  await app.listen(3001);
 }
 bootstrap();

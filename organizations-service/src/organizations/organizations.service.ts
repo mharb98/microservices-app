@@ -5,16 +5,27 @@ import { UpdateOrganizationDto } from './dtos/update-organization.dto';
 import QueryOrganizationsResult from './types/query-organizations-result.entity';
 import { OrganizationEntity } from './entities/organization.entity';
 import { OrganizationsRepository } from './repositories/organizations.repository';
+import { ProducerService } from '../brokers/producer.service';
 
 @Injectable()
 export class OrganizationsService {
-  constructor(private repository: OrganizationsRepository) {}
+  constructor(
+    private repository: OrganizationsRepository,
+    private producerService: ProducerService,
+  ) {}
 
   async create(
     createOrganizationDto: CreateOrganizationDto,
   ): Promise<OrganizationEntity> {
-    const organizationEntity = this.repository.create({
+    const organizationEntity = await this.repository.create({
       ...createOrganizationDto,
+    });
+    await this.producerService.produce('organizations', {
+      key: 'create-organization',
+      value: JSON.stringify({
+        id: organizationEntity.id,
+        name: organizationEntity.name,
+      }),
     });
     return organizationEntity;
   }

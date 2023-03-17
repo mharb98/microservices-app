@@ -28,7 +28,6 @@ export class OrganizationsRepository {
     try {
       return await organizationEntity.save();
     } catch (error) {
-      console.log(error);
       if (error.code === 11000) {
         throw new ConflictException('Organization has already been created');
       }
