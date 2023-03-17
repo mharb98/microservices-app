@@ -17,6 +17,8 @@ services:
     depends_on:
       - postgresdb
       - redis-service
+    extra_hosts:
+      - "host.docker.internal:192.168.1.9"
   organizations:
     build: 
       context: ./organizations-service
