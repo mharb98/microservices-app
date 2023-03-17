@@ -23,6 +23,7 @@ export class PrismaInternalRoles implements InternalRolesRepository {
           internalProfileId: internalProfileId,
           role: role,
         },
+        include: { internalProfile: { include: { user: true } } },
       });
     } catch (error) {
       if (error.code === 'P2002') {
