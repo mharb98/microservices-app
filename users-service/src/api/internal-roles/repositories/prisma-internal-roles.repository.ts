@@ -4,8 +4,9 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { InternalRole, InternalRoles } from '@prisma/client';
+import { InternalRole } from '@prisma/client';
 import { PrismaService } from '../../../prisma/prisma.service';
+import { InternalRoleEntity } from '../entities/internal-role.entity';
 import { InternalRolesRepository } from './internal-roles-repository.interface';
 
 @Injectable()
@@ -15,7 +16,7 @@ export class PrismaInternalRoles implements InternalRolesRepository {
   async create(
     internalProfileId: number,
     role: InternalRole,
-  ): Promise<InternalRoles> {
+  ): Promise<InternalRoleEntity> {
     try {
       return await this.prisma.internalRoles.create({
         data: {
