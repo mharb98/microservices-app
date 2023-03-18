@@ -13,10 +13,11 @@ services:
       - "5555:5555"
     volumes:
       - ./users-service:/app
-      - /app/node_modules
+      # - /app/node_modules
     depends_on:
       - postgresdb
       - redis-service
+      - kafka
     extra_hosts:
       - "host.docker.internal:192.168.1.9"
   organizations:
@@ -31,9 +32,10 @@ services:
       - "3002:3000"
     volumes:
       - ./organizations-service:/app
-      - /app/node_modules
+      # - /app/node_modules
     depends_on:
       - mongodb
+      - kafka
   postgresdb:
     image: postgres
     container_name: postgresdb
@@ -66,8 +68,31 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: user
       MONGO_INITDB_ROOT_PASSWORD: password
+  zookeeper:
+    image: docker.io/bitnami/zookeeper:3.8
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    volumes:
+      - "zookeeper_data:/bitnami"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: docker.io/bitnami/kafka:3.4
+    container_name: kafka
+    ports:
+      - "9094:9092"
+    volumes:
+      - "kafka_data:/bitnami"
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
 
 volumes:
   pgdata:
   redisdata:
   mongodata:
+  zookeeper_data:
+  kafka_data:

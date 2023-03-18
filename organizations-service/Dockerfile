@@ -1,4 +1,4 @@
-FROM node:14-alpine as development
+FROM node:16-alpine as development
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ EXPOSE 3002
 
 CMD ["npm", "run", "start:dev"]
 
-FROM node:14-alpine AS builder
+FROM node:16-alpine AS builder
 
 WORKDIR /app
 
@@ -23,7 +23,7 @@ COPY . .
 
 RUN npm run build
 
-FROM node:14-alpine as production
+FROM node:16-alpine as production
 
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
