@@ -14,7 +14,7 @@ export class ModeratorsConsumer implements OnModuleInit {
   async onModuleInit() {
     await this.consumer.consume({
       topics: { topics: ['users'] },
-      config: { groupId: 'organizations-service' },
+      config: { groupId: this.configService.get('GROUP_ID') },
       onMessage: (message) => this.handleMessageConsumption(message),
     });
   }

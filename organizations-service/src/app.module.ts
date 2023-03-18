@@ -10,6 +10,7 @@ import { OrganizationsCharityTypesModule } from './organizations-charity-types/o
 import { MongooseModule } from '@nestjs/mongoose';
 import { BrokersModule } from './brokers/brokers.module';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -18,9 +19,10 @@ import { UsersModule } from './users/users.module';
     LocationsModule,
     CharityTypesModule,
     OrganizationsCharityTypesModule,
-    MongooseModule.forRoot('mongodb://localhost/organizations_service'),
+    MongooseModule.forRoot(process.env.DATABASE_URL),
     BrokersModule,
     UsersModule,
+    ConfigModule.forRoot({ isGlobal: true }),
   ],
   controllers: [AppController],
   providers: [AppService],
