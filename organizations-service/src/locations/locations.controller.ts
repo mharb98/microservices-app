@@ -61,7 +61,7 @@ export class LocationsController {
   @ApiNoContentResponse({ description: 'Sets a specific location as default' })
   @ApiParam({ name: 'organizationId' })
   @HttpCode(204)
-  @Patch(':locationId/setDefaultLocaiton')
+  @Patch(':locationId/set-default-locaiton')
   async setDefaultOrganizationLocation(
     @Param('organizationId') organizationId: string,
     @Param('locationId') locationId: string,

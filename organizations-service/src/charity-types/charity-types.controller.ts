@@ -12,7 +12,7 @@ import { CreateCharityTypeDto } from './dtos/create-charity-type.dto';
 import { UpdateCharityTypeDto } from './dtos/update-charity-type.dto';
 import { CharityTypeEntity } from './entities/charity-type.entity';
 
-@Controller('charityTypes')
+@Controller('charity-types')
 @ApiTags('charityTypes')
 export class CharityTypesController {
   constructor(private charityTypeService: CharityTypesService) {}

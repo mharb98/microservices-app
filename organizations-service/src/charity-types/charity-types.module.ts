@@ -13,5 +13,6 @@ import { MongooseModule } from '@nestjs/mongoose';
       { name: CharityType.name, schema: CharityTypeSchema },
     ]),
   ],
+  exports: [MongooseModule],
 })
 export class CharityTypesModule {}

@@ -15,5 +15,6 @@ import { BrokersModule } from '../brokers/brokers.module';
     ]),
     BrokersModule,
   ],
+  exports: [MongooseModule],
 })
 export class OrganizationsModule {}

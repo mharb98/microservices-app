@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
+import { CharityType } from '../../charity-types/schema/charity-type.schema';
 import { ContactInfo } from '../../contact-infos/schema/contact-info.schema';
 import { Location } from '../../locations/schema/location.schema';
-import { Moderator } from '../../moderators/schema/moderator.schema';
+import { Moderator } from '../../users/schema/moderator.schema';
 
 @Schema({ timestamps: true, collection: 'organizations' })
 export class Organization {
@@ -22,6 +23,12 @@ export class Organization {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ContactInfo' }],
   })
   contactInfo: ContactInfo[];
+
+  @Prop({
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'CharityType' }],
+  })
+  charityTypes: CharityType[];
+
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Moderator',

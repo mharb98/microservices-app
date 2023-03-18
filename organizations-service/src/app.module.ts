@@ -9,7 +9,7 @@ import { CharityTypesModule } from './charity-types/charity-types.module';
 import { OrganizationsCharityTypesModule } from './organizations-charity-types/organizations-charity-types.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { BrokersModule } from './brokers/brokers.module';
-import { ModeratorsModule } from './moderators/moderators.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -20,7 +20,7 @@ import { ModeratorsModule } from './moderators/moderators.module';
     OrganizationsCharityTypesModule,
     MongooseModule.forRoot('mongodb://localhost/organizations_service'),
     BrokersModule,
-    ModeratorsModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

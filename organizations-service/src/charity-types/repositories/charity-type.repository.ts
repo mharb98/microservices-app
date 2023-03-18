@@ -28,7 +28,7 @@ export class CharityTypesRepository {
       return await locationEntity.save();
     } catch (error) {
       if (error.code === 11000) {
-        throw new ConflictException('Organization has already been created');
+        throw new ConflictException('Charity type has already been created');
       }
       throw new InternalServerErrorException('Could not add charity type');
     }

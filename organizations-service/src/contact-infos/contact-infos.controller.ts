@@ -22,11 +22,11 @@ import { ContactInfosService } from './contact-infos.service';
 import { CreateContactInfoDto } from './dtos/create-contact-info.dto';
 import { ContactInfoEntity } from './entities/contact-info.entity';
 
-@ApiTags('contactInfos')
+@ApiTags('contact-infos')
 @ApiNotFoundResponse({
   description: 'Organization or contact info does not exist.',
 })
-@Controller('organizations/:organizationId/contactInfos')
+@Controller('organizations/:organizationId/contact-infos')
 export class ContactInfosController {
   constructor(private contactInfosService: ContactInfosService) {}
 
@@ -71,7 +71,7 @@ export class ContactInfosController {
   @ApiNoContentResponse({ description: 'Sets a contact info as the default.' })
   @ApiParam({ name: 'organizationId' })
   @HttpCode(204)
-  @Patch('setDefaultContactInfo/:contactInfoId')
+  @Patch(':contactInfoId/set-default-contact-info')
   async setDefaultContactInfo(
     @Param('organizationId') organizationId: string,
     @Param('contactInfoId') contactInfoId: string,
